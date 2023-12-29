@@ -1,0 +1,13 @@
+<%= form_tag :salons, method: :get, class: "index" do %>
+    <%= text_field_tag "q",params[:q] %>
+    <%= submit_tag "検索" %>
+    <!--都道府県選択-->
+    <%= select_tag :prefecture, options_for_select(Salon.prefecture,:selected=>@salon )%>
+    <!--コース選択-->
+    <%=radio_button_tag "sex",1,params[:sex]=="1" %>
+    <%=label_tag "sex" , "男"%>
+    <%=radio_button_tag "sex",2 ,params[:sex]=="2"%>
+    <%=label_tag "sex" , "女"%>
+    <%=radio_button_tag "sex",3 ,params[:sex]=="3" || nil==params[:sex]%>
+    <%=label_tag "sex" , "指定なし"%>
+<% end %>

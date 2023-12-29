@@ -1,0 +1,10 @@
+<h1>Salons#index</h1>
+<%= render "shared/form_search" %>
+<tbody>
+    <% @salons&.each do |salon|%>
+        <tr>
+            <td><%= link_to salon.name, salon %></td>
+        </tr>
+    <% end %>
+</tbody>
+

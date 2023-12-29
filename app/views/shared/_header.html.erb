@@ -1,0 +1,10 @@
+<%=
+    #管理者・オーナー・一般ユーザーの区別
+    #if controller.kind_of?(Administrator::Base)
+        #render "shared/administrator_menubar"
+    #elsif controller.kind_of?(Owners::Base)
+        #render "shared/owner_menubar"
+    #else
+        render "shared/menubar"
+    #end
+%>

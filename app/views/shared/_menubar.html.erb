@@ -1,10 +1,12 @@
-<%=
-    #管理者・オーナー・一般ユーザーの区別
-    if controller.kind_of?(Administrator::Base)
-        #render "shared/administrator_menubar"
-    elsif controller.kind_of?(Owner::Base)
-        #render "shared/owner_menubar"
-    else
-        render "shared/menubar"
-    end
-%>
+<!--メニューバー-->
+<nav class="menubar">
+    <ul>
+        <%=menu_link_to"TOP",:root%>
+        <%=menu_link_to" ニュース","#"%>
+        <%=menu_link_to" ブログ","#" %>
+        <!--未実装　ログインした場合のみ表示される-->
+        <% if true %>
+            <%= menu_link_to" マイページ", "#" %>
+        <% end %>
+    </ul>
+</nav>
