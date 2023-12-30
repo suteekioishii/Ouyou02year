@@ -27,7 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_22_060602) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "required_time"
-    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x0000000105eb8998>"
+    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x0000000108071dc8>"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -55,7 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_22_060602) do
   create_table "reservations", force: :cascade do |t|
     t.integer "coustomer_id", null: false
     t.date "reserved_date", null: false
-    t.integer "reserved_", null: false
+    t.integer "reserved_time", null: false
     t.integer "sum_price", null: false
     t.integer "cource_id"
     t.datetime "created_at", null: false

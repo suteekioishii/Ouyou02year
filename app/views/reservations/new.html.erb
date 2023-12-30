@@ -1,0 +1,7 @@
+<h1>Reservations#new</h1>
+<%= form_for @reservation do |form| %>
+    <%= form.label :reserved_date,"予約日時" %>
+    <%= form.date_select :reserved_date %>
+
+    <%= form.submit%>
+<% end %>
