@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_22_060602) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_30_020156) do
   create_table "administrators", force: :cascade do |t|
     t.string "name", null: false
     t.string "email"
@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_22_060602) do
     t.date "birthday", default: -> { "CURRENT_DATE" }, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -27,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_22_060602) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "required_time"
-    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x0000000108071dc8>"
+    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x000000010a3439a0>"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -38,6 +39,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_22_060602) do
     t.date "birthday", default: -> { "CURRENT_DATE" }, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
   end
 
   create_table "owners", force: :cascade do |t|
@@ -49,6 +51,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_22_060602) do
     t.date "birthday", default: -> { "CURRENT_DATE" }, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
     t.index ["salon_id"], name: "index_owners_on_salon_id"
   end
 

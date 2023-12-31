@@ -10,12 +10,18 @@ class ReservationsController < ApplicationController
   end
   
   def create
-    @reservation = Reservation.new(reservation_params)
-    if @reservation.save
-        redirect_to @reservation,notice: "会員を登録しました。"
-    else
-        render "new"
+    #ログインしている場合
+    if current_customer
+      @reservation = Reservation.new(reservation_params)
+      if @reservation.save
+          redirect_to @reservation,notice: "会員を登録しました。"
+      else
+          render "new"
+      end
+    else #ログインしていない場合
+      session[:reservation] = reservation_params
     end
+    
   end
 
   # ストロング・パラメータ

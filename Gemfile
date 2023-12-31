@@ -31,3 +31,5 @@ group :development do
   # gem "spring"
 end
 
+#パスワードの暗号化用
+gem'bcrypt','~>3.1.7'

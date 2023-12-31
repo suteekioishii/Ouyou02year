@@ -4,4 +4,7 @@ class CustomersController < ApplicationController
 
   def show
   end
+  
+  def login
+  end
 end
