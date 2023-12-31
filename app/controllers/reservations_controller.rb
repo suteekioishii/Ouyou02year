@@ -13,6 +13,10 @@ class ReservationsController < ApplicationController
     #ログインしている場合
     if current_customer
       @reservation = Reservation.new(reservation_params)
+      @reservation.reserved_time = Time.new
+      @reservation.sum_price = 1
+      @reservation.cource_id = 200
+      @reservation.customer_id = cookies.signed[:customer_id]
       if @reservation.save
           redirect_to @reservation,notice: "会員を登録しました。"
       else
@@ -20,6 +24,7 @@ class ReservationsController < ApplicationController
       end
     else #ログインしていない場合
       session[:reservation] = reservation_params
+      redirect_to @reservation,notice: "ログインを行なって下さい"
     end
     
   end

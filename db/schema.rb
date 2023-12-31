@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_30_020156) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "required_time"
-    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x000000010a3439a0>"
+    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x0000000110b8f4f0>"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -56,14 +56,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_30_020156) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.integer "coustomer_id", null: false
+    t.integer "customer_id", null: false
     t.date "reserved_date", null: false
     t.integer "reserved_time", null: false
     t.integer "sum_price", null: false
     t.integer "cource_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["coustomer_id"], name: "index_reservations_on_coustomer_id"
+    t.index ["customer_id"], name: "index_reservations_on_customer_id"
   end
 
   create_table "salons", force: :cascade do |t|
