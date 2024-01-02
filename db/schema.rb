@@ -23,12 +23,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_30_020156) do
   end
 
   create_table "courses", force: :cascade do |t|
+    t.integer "salon_id", null: false
     t.string "name", null: false
     t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "required_time"
-    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x0000000110b8f4f0>"
+    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x000000010a678c60>"
+    t.index ["salon_id"], name: "index_courses_on_salon_id"
   end
 
   create_table "customers", force: :cascade do |t|

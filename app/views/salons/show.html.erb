@@ -1,2 +1,14 @@
 <h1>Salons#show</h1>
-<%= link_to "予約", :new_reservation%>
+<%= link_to "予約", [:new,@salon,:reservation] %>
+<%= form_tag [:new,@salon,:reservation],method: :get do %>
+    <%= submit_tag "予約可能時間の表示" %>
+    <!--都道府県選択-->
+    <%= select_tag :prefecture, options_for_select(Salon.course,:selected=>@salon )%>
+    <!--コース選択-->
+    <%=radio_button_tag "sex",1,params[:sex]=="1" %>
+    <%=label_tag "sex" , "男"%>
+    <%=radio_button_tag "sex",2 ,params[:sex]=="2"%>
+    <%=label_tag "sex" , "女"%>
+    <%=radio_button_tag "sex",3 ,params[:sex]=="3" || nil==params[:sex]%>
+    <%=label_tag "sex" , "指定なし"%>
+<% end %>
