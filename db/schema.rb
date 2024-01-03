@@ -29,7 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_30_020156) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "required_time"
-    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x000000010a678c60>"
+    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x0000000107eb8e00>"
     t.index ["salon_id"], name: "index_courses_on_salon_id"
   end
 

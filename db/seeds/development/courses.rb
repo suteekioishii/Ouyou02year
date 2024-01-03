@@ -3,7 +3,7 @@ money = [2900, 5400, 6800, 12600]
 time = [2, 4, 5, 3]
 
 0.upto(3) do |idx|
-    1.upto(4) do |salon|
+    1.upto(10) do |salon|
         Course.create(
             salon_id: salon, 
             name: "#{cnames[idx]}",     #コース名
