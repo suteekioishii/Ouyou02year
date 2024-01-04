@@ -9,10 +9,21 @@
     <%= form.submit%>
 <% end %>
 <table>
-    <tr>
-    </tr>
-    <tr>
-    </tr>
-    <tr>
-    </tr>
+    <!--縦に進める。30分ごと進める-->
+    <% for minute in 0..47 %>
+        <% @dateCol = Date %>
+        <tr>
+            <!--横に進める。1日進める-->
+            <% @dateRow = @dateCol %>
+            <% for day in 0..6%>
+                <!--Shiftを検索-->
+                <% for count in 1%>
+                    <% if %>
+                        <%  %>
+                    <% else %>
+                    <p>x</p>
+                <% end %>
+            <% end %>
+        </tr>
+    <% end %>
 </table>

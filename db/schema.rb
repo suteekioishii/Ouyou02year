@@ -26,10 +26,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_30_020156) do
     t.integer "salon_id", null: false
     t.string "name", null: false
     t.integer "price", null: false
+    t.integer "required_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "required_time"
-    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x0000000107eb8e00>"
     t.index ["salon_id"], name: "index_courses_on_salon_id"
   end
 
@@ -62,7 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_30_020156) do
     t.date "reserved_date", null: false
     t.integer "reserved_time", null: false
     t.integer "sum_price", null: false
-    t.integer "cource_id"
+    t.integer "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_reservations_on_customer_id"
