@@ -1,4 +1,3 @@
-#この変数はreservation_newビューでも用いた。
 start = DateTime.new(2024,1,7,0,0,0)
 
 0.upto(9) do |idx|
