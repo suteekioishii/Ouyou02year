@@ -22,9 +22,11 @@
       <% if flash.alert %>
         <p class="alert"><%= flash.alert %>
       <% end %>
-
       <%=yield %>
     </main>
+    <aside id = "sidebar">
+      <%= render "shared/sidebar" %>
+    </aside>
     <footer>
       <%= render "shared/footer"%>
     </footer>

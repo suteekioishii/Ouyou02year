@@ -31,7 +31,7 @@
                 <!--コース別の必要時間を測る-->
                 <% for count in 0..@count.to_i-1%>
                     <% @possible_reservation = true%><!--予約できるか区別用の変数-->
-                    <% if not Shift.where(date_time: @searched_date.since((30*count).minutes)) %>
+                    <% if not Shift.exists?(date_time: @searched_date.since((30*count).minutes)) %>
                         <% @possible_reservation = false %>
                     <% end %>
                 <% end %>

@@ -1,3 +1,5 @@
+<p>ログイン<p>
+    <%= form_tag :session, id: "login_form" do %>
     <div>
         <label>ユーザー名：</label>
         <input type = "text" name="name">
@@ -12,3 +14,4 @@
     <div>
         <%= link_to "会員登録はこちら", :new_customer %>
     </div>
+<% end %>

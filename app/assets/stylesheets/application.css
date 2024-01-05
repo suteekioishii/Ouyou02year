@@ -13,3 +13,89 @@
  *= require_tree .
  *= require_self
  */
+
+ /* ページ全体 */
+ body {
+    background-color: white;
+    color: black;
+    margin: 0; padding: 0;
+    font-family: Meiryo, sans-serif;
+  }
+
+ /* リンク */
+a:link { color: rgb(14, 14, 238); }
+
+/* ブロック要素 */
+p, h1, h2, h3, table, ul {
+    margin: 0 0 1em;
+}
+
+/* ナビゲーション */
+nav ul,
+ul.toolbar,
+ul.links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li,
+div.toolbar li,
+ul.toolbar li,
+ul.links li {
+  display: inline;
+}
+
+/* 全体の枠 */
+div#container {
+    margin: 0 auto;
+    padding-top: 5px;
+    width: 780px;
+}
+
+/* 左の枠（コンテンツを入れる） */
+main {
+    float: left;
+    width: 530px;
+    padding: 10px 10px 10px 0;
+}
+
+/* 右の枠（サイドバーを入れる） */
+aside#sidebar {
+    float: left;
+    width: 230px;
+    background-color: #e9f2cc;
+    padding: 5px;
+    font-size: 86%;
+}
+
+/* ヘッダー */
+header {
+    border-top: 2px solid rgb(239, 177, 124);
+    padding-top: 2px;
+}
+
+/* メニューバー */
+nav.menubar {
+    padding: 2px;
+    background-color: #dda5a5;
+    color: #ccc;
+    font-size: 80%;
+    padding: 8px 16px;
+}
+
+nav.menubar ul li:not(:last-child):after {
+    color: #5f3d3d;
+    content: " | ";
+    margin:2 4px;
+}
+
+/* メインコンテンツ */
+main h1 {
+    color: rgb(254, 165, 48);
+    font-weight: normal;
+    font-size: 150%;
+    border-bottom: 2px solid rgb(233, 197, 113);
+    margin-bottom: 0.5em;
+}
+
