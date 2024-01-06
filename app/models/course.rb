@@ -1,3 +1,3 @@
 class Course < ApplicationRecord
-    belongs_to :salon
+    has_many :reservations, dependent: :nullify
 end

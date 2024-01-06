@@ -5,7 +5,6 @@
         0.upto(23) do|minute|
             Shift.create!(
                 stylist_id: idx + 1,
-                reservation_id: 1,
                 date_time: start.since(30.minutes*minute)
             )
         end

@@ -1,0 +1,23 @@
+
+
+
+table.list td, table.attr td {
+    background-color: #cee;
+}
+
+
+table.attr th {
+    text-align:center;
+}
+
+table.list th, table.attr th {
+    background-color: #499;
+    color: white;
+     font-weight: normal;
+}
+
+td.reserved_tr {
+    background-color: #499;
+    color: rgb(20, 175, 0);
+     font-weight: normal;
+}

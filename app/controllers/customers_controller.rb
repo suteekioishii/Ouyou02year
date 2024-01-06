@@ -7,19 +7,24 @@ class CustomersController < ApplicationController
   end
 
   def create
-    @customer = Customer.new(params[:customer])
+    @customer = Customer.new(customer_params)
     if @customer.save
       redirect_to @customer, notice: "新規登録が完了しました。"
     end
   end
 
   def show
+    @customer = Customer.find(params[:id])
+  end
+
+  def edit
+    @customer = Customer.find(params[:id])
   end
   
   def login
   end
 
-  #カスタマーのストロングパラメータ
+  #カスタマーのストロングパラ3メータ
   private def customer_params
     attrs = [
       :name,

@@ -1,2 +1,29 @@
 <h1>Reservations#show</h1>
-<p>Find me in app/views/reservations/show.html.erb</p>
+<table class ="attr">
+    <tr>
+        <th>担当スタイリスト</th>
+        <td><%= Shift.find(@reservation.id).stylist.name%></td>
+    </tr>
+    <tr>
+        <th>予約コース</th>
+        <td><%= Course.find(@reservation.course_id).name %></td>
+    </tr>
+    <!--予約された時間のdatetime変数-->
+    <% @date = @reservation.reserved_date%>
+    <tr>
+        <th>予約日程</th>
+        <td><%= @date.strftime("%m月%d日")%></td>
+    </tr>
+    <tr>
+        <th>予約時間</th>
+        <td>
+            <%= @date.strftime("%H:%M 〜 ")%>
+            <% @date.since(30.minute*@reservation.reserved_time)%>
+            <%= @date.strftime("%H:%M")%>
+        </td>
+    </tr>
+    <tr>
+        <th>合計金額</th>
+        <td><%= @reservation.sum_price %>円</td>
+    </tr>
+</table>

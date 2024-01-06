@@ -1,15 +1,20 @@
 <h1>Reservations#new</h1>
-<h3>選択された美容師 : <%= Stylist.find(@stylist_id).name %></h2>
-<h3>選択されたコース : <%= Course.find_by(required_time: @required_time).name %></h2>
-<%= form_with model:@reservation do |form| %>
-<table>
+<h3>選択された美容師 : <%= @stylist_name %></h2>
+<h3>選択されたコース : <%= @course_name %></h2>
+<%= form_with model:[@salon,@reservation] do |form| %>
+    <%= hidden_field_tag :salon_id, @salon %>
+    <%= hidden_field_tag :stylist_id, @stylist_id %>
+    <%= form.hidden_field :reserved_time, :value => @required_time %>
+    <%= form.hidden_field :course_id, :value =>  @course_id%>
+    <%= form.hidden_field :sum_price, :value =>  @sum_price%>
+<table class="attr" >
     <!--ベースの日付を作成-->
     <% @base_date = DateTime.new(2024,1,7,0,0,0) %>
     <!--列名を作成-->
     <tr>
         <td></td>
         <%for column_name in 0..6%>
-            <td><%= @base_date.since(1.days*column_name).month.to_s+"月"+@base_date.since(1.days*column_name).day.to_s+"日"%></td>
+            <th width="150"><%= @base_date.since(1.days*column_name).month.to_s+"月"+@base_date.since(1.days*column_name).day.to_s+"日"%></th>
         <% end %>
     </tr>
     <!--縦に進める。30分ごと進める-->
@@ -18,25 +23,25 @@
         <% @dateCol = @dateCol.since(30.minutes*minute)%>
         <tr>
             <!--行名を作成-->
-            <td><%= @dateCol.hour.to_s+"時"+@dateCol.minute.to_s+"分"%></td>
+            <td width="180" height="30"class="reserved_tr"><%= @dateCol.hour.to_s+"時"+@dateCol.minute.to_s+"分~"%></td>
             <!--横に進める。1日進める-->
             <% for day in 0..6%>
                 <% @dateRow = @dateCol %>
-                <% @dateRow = @dateRow.since(1.days)%>
+                <% @dateRow = @dateRow.since(1.days*day)%>
                 <!--Shiftを検索・required_timeの回数分-->
                 <% @searched_date = @dateRow%>
                 <!--コース別の必要時間を測る-->
                 <% @possible_reservation = true%><!--予約できるか区別用の変数-->
                 <% for count in 0..@required_time.to_i-1%>
-                    <% if not Shift.exists?(date_time: @searched_date.since((30*count).minutes)) %>
+                    <% if not Shift.where(date_time: @searched_date.since((30*count).minutes),stylist_id: @stylist_id).exists?(reservation_id: nil) %>
                         <% @possible_reservation = false %>
                     <% end %>
                 <% end %>
                 <!--予約できるか判断-->
                 <% if @possible_reservation %>
                     <td>
-                        <%= form.radio_button "date_time",@searched_date %><%=label_tag "date_time" , "#{@searched_date.minute}"%>
-                    </td> }"
+                        <%= form.radio_button "reserved_date",@searched_date %>
+                    </td> 
                 <% else %>
                     <td><p>x</p></td>
                 <% end %>

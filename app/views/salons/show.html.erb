@@ -1,8 +1,18 @@
 <h1>Salons#show</h1>
-<%= link_to "予約", [:new,@salon,:reservation] %>
 <%= form_with url: [:new,@salon,:reservation], method: :get do |f| %>
-    <%= f.submit "予約可能時間の表示" %>
-    <!--都道府県選択-->
-    <%= f.collection_select :reserved_course, @salon.courses,:id,:name %>
+    <!--コース選択-->
+    <%= f.collection_select :reserved_course, Course.all,:id,:name %>
+    <!--
+    <%= label_tag :course_free, '指定なし' %>
+    <%= check_box_tag :course_free %>
+    -->
+    <br>
+    <!--スタイリスト選択-->
     <%= f.collection_select :reserved_stylist, @salon.stylists,:id,:name %>
+    <!--
+    <%= label :stylist_free, '指定なし'%>
+    <%= check_box_tag :stylist_free%>
+    -->
+    <br>
+    <%= f.submit "予約可能時間の表示" %>
 <% end %>

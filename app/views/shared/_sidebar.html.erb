@@ -1,3 +1,5 @@
+<% if not current_customer %>
+
 <p>ログイン<p>
     <%= form_tag :session, id: "login_form" do %>
     <div>
@@ -14,4 +16,8 @@
     <div>
         <%= link_to "会員登録はこちら", :new_customer %>
     </div>
+<% end %>
+
+<% else %>
+    <p>ログイン済みです</p>
 <% end %>

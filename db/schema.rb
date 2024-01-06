@@ -23,13 +23,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_30_020156) do
   end
 
   create_table "courses", force: :cascade do |t|
-    t.integer "salon_id", null: false
     t.string "name", null: false
     t.integer "price", null: false
     t.integer "required_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["salon_id"], name: "index_courses_on_salon_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -58,12 +56,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_30_020156) do
 
   create_table "reservations", force: :cascade do |t|
     t.integer "customer_id", null: false
-    t.date "reserved_date", null: false
+    t.integer "course_id", null: false
+    t.datetime "reserved_date", null: false
     t.integer "reserved_time", null: false
     t.integer "sum_price", null: false
-    t.integer "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_reservations_on_course_id"
     t.index ["customer_id"], name: "index_reservations_on_customer_id"
   end
 

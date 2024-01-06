@@ -1,2 +1,23 @@
 <h1>Customers#show</h1>
-<p>Find me in app/views/customers/show.html.erb</p>
+<table class ="attr">
+    <tr>
+        <th>ユーザー名</th>
+        <td><%= @customer.name%></td>
+    </tr>
+    <tr>
+        <th>メールアドレス</th>
+        <td><%= @customer.email %></td>
+    </tr>
+    <tr>
+        <th>電話番号</th>
+        <td><%= @customer.phone%></td>
+    </tr>
+    <tr>
+        <th>性別</th>
+        <td><%= @customer.sex == 1 ? "男" : "女" %></td>
+    </tr>
+    <tr>
+        <th>誕生日</th>
+        <td><%= @customer.birthday&.strftime("%Y年%m月%d日") %></td>
+    </tr>
+</table>

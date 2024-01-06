@@ -56,14 +56,14 @@ div#container {
 /* 左の枠（コンテンツを入れる） */
 main {
     float: left;
-    width: 530px;
+    width: 600px;
     padding: 10px 10px 10px 0;
 }
 
 /* 右の枠（サイドバーを入れる） */
 aside#sidebar {
-    float: left;
-    width: 230px;
+    float:inline-end;
+    width: 160px;
     background-color: #e9f2cc;
     padding: 5px;
     font-size: 86%;
@@ -82,6 +82,7 @@ nav.menubar {
     color: #ccc;
     font-size: 80%;
     padding: 8px 16px;
+    width: 550px;
 }
 
 nav.menubar ul li:not(:last-child):after {
