@@ -1,10 +1,7 @@
 <h1>Reservations#new</h1>
-<%= form_for @reservation do |form| %>
-    <%= form.label :reserved_date,"予約日時" %>
-    <%= form.date_select :reserved_date %>
-
-    <%= form.submit%>
-<% end %>
+<h3>選択された美容師 : <%= Stylist.find(@stylist_id).name %></h2>
+<h3>選択されたコース : <%= Course.find_by(required_time: @required_time).name %></h2>
+<%= form_with model:@reservation do |form| %>
 <table>
     <!--ベースの日付を作成-->
     <% @base_date = DateTime.new(2024,1,7,0,0,0) %>
@@ -29,15 +26,17 @@
                 <!--Shiftを検索・required_timeの回数分-->
                 <% @searched_date = @dateRow%>
                 <!--コース別の必要時間を測る-->
-                <% for count in 0..@count.to_i-1%>
-                    <% @possible_reservation = true%><!--予約できるか区別用の変数-->
+                <% @possible_reservation = true%><!--予約できるか区別用の変数-->
+                <% for count in 0..@required_time.to_i-1%>
                     <% if not Shift.exists?(date_time: @searched_date.since((30*count).minutes)) %>
                         <% @possible_reservation = false %>
                     <% end %>
                 <% end %>
                 <!--予約できるか判断-->
                 <% if @possible_reservation %>
-                    <td><p>o</p></td>
+                    <td>
+                        <%= form.radio_button "date_time",@searched_date %><%=label_tag "date_time" , "#{@searched_date.minute}"%>
+                    </td> }"
                 <% else %>
                     <td><p>x</p></td>
                 <% end %>
@@ -45,3 +44,5 @@
         </tr>
     <% end %>
 </table>
+    <%= form.submit%>
+<% end %>

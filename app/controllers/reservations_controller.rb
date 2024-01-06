@@ -10,8 +10,10 @@ class ReservationsController < ApplicationController
     #reservationの新規レコードの作成
     @reservation = Reservation.new
     #コース別の必要時間の取得
-    @count = Course.find(params[:reserved_course]).required_time
-    #予約可能時間表を表示するためのshiftRBを取得
+    @required_time = Course.find(params[:reserved_course]).required_time
+    #styilst.idを送る
+    @stylist_id = params[:reserved_stylist]
+    #予約可能時間表を表示するためのshit
     @shifts = Shift.where(stylist_id: params[:reserved_stylist].to_i).where(course_id: params[:reserved_course].to_i)
   end
   
