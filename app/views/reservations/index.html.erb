@@ -3,7 +3,7 @@
 <ul>
     <!--予約情報の取得-->
     <% @reservations = current_customer.reservations %>
-    <% if not @reservations.nil? %>
+    <% if @reservations.count != 0 %>
         <% @reservations.each do |reservation|%>
             <% @salon_name = reservation.shifts.first.stylist.salon.name %>
             <% @reserved_time = reservation.reserved_date.ago(9.hour).strftime("%m月%d日 %H:%M 〜") %>

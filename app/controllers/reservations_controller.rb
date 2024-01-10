@@ -68,10 +68,6 @@ class ReservationsController < ApplicationController
   def destroy
     @reservation = Reservation.find_by(id: params[:id].to_i)
     @shifts = @reservation.shifts
-    #shiftの外部キーをnullにする。
-    @shifts.each do |shift|
-      shift.reservation_id = null
-    end
     @reservation.destroy
     redirect_to :reservations, notice: "予約を削除しました。"
   end
