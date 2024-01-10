@@ -2,12 +2,11 @@
 <nav class="menubar">
     <ul>
         <%=menu_link_to"TOP",:root%>
-        <%=menu_link_to" ニュース","#"%>
-        <%=menu_link_to" ブログ","#" %>
         <!--未実装　ログインした場合のみ表示される-->
         <% if not current_customer %>
                 <%= menu_link_to "ユーザー登録", login_customers_path %>
         <% else %>
+            <%= menu_link_to "予約情報", :reservations %>
             <%= menu_link_to "マイページ", current_customer %>
             <%= menu_link_to "ログアウト",:session,
             method: :delete, data:{ confirm: "ログアウトしますか？"}%>

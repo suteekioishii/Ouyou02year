@@ -1,2 +1,34 @@
 <h1>Reservations#index</h1>
-<p>Find me in app/views/reservations/index.html.erb</p>
+<h3>予約中の美容院</h3>
+<ul>
+    <!--予約情報の取得-->
+    <% @reservations = current_customer.reservations %>
+    <% if not @reservations.nil? %>
+        <% @reservations.each do |reservation|%>
+            <% @salon_name = reservation.shifts.first.stylist.salon.name %>
+            <% @reserved_time = reservation.reserved_date.ago(9.hour).strftime("%m月%d日 %H:%M 〜") %>
+            <li><%= link_to @salon_name + @reserved_time, reservation%>
+            <%= link_to "予約の削除",reservation,
+            method: :delete, data:{ confirm: "予約を削除しますか？"}%>
+            </li>
+        <% end %>
+    <% else %>
+        <li>現在ご予約しておりません</li>
+    <% end %>
+</ul>
+
+<h3>予約中の美容院</h3>
+<ul>
+    <!--予約情報の取得-->
+    <% @reservations = current_customer.reservations %>
+    <% if not @reservations.nil? %>
+        <% @reservations.each do |reservation|%>
+            <% @salon_name = reservation.shifts.first.stylist.salon.name %>
+            <% @reserved_time = reservation.reserved_date.ago(9.hour).strftime("%m月%d日 %H:%M 〜") %>
+            <li><%= link_to @salon_name + @reserved_time,
+            reservation%></li>
+        <% end %>
+    <% else %>
+        <li>現在ご予約しておりません</li>
+    <% end %>
+</ul>

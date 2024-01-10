@@ -63,7 +63,17 @@ class ReservationsController < ApplicationController
       #session[:reservation] = reservation_params
       redirect_to new_customer_path, notice: "ログインを行なって下さい"
     end
-    
+  end
+
+  def destroy
+    @reservation = Reservation.find_by(id: params[:id].to_i)
+    @shifts = @reservation.shifts
+    #shiftの外部キーをnullにする。
+    @shifts.each do |shift|
+      shift.reservation_id = null
+    end
+    @reservation.destroy
+    redirect_to :reservations, notice: "予約を削除しました。"
   end
 
   # ストロング・パラメータ

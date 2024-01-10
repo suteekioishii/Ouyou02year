@@ -9,7 +9,7 @@
         <td><%= Course.find(@reservation.course_id).name %></td>
     </tr>
     <!--予約された時間のdatetime変数-->
-    <% @date = @reservation.reserved_date%>
+    <% @date = @reservation.reserved_date.ago(9.hour)%>
     <tr>
         <th>予約日程</th>
         <td><%= @date.strftime("%m月%d日")%></td>
@@ -18,7 +18,7 @@
         <th>予約時間</th>
         <td>
             <%= @date.strftime("%H:%M 〜 ")%>
-            <% @date.since(30.minute*@reservation.reserved_time)%>
+            <% @date = @date.since(30.minute*@reservation.reserved_time)%>
             <%= @date.strftime("%H:%M")%>
         </td>
     </tr>

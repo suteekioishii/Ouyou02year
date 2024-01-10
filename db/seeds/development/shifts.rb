@@ -1,4 +1,4 @@
-0.upto(9) do |idx|
+0.upto(19) do |idx|
     0.upto(13) do |days|
         #初期データは9時開業の12時間営業
         start = DateTime.new(2024,1,7+days,9,0,0)
