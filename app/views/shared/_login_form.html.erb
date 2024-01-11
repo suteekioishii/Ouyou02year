@@ -9,6 +9,9 @@
     <div>
         <input type="submit" value="ログイン">
     </div>
+    <!--customerなら新規登録の誘導を行う。-->
+    <% if not controller.kind_of?(Admin::Base) or  not controller.kind_of?(Owner::Base)%>
     <div>
         <%= link_to "会員登録はこちら", :new_customer %>
     </div>
+    <% end %>

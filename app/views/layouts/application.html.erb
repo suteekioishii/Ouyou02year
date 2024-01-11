@@ -24,9 +24,12 @@
       <% end %>
       <%=yield %>
     </main>
+     <!--customerなら新規登録の誘導を行う。-->
+    <% if not controller.kind_of?(Admin::Base) and  not controller.kind_of?(Owner::Base)%>
     <aside id = "sidebar">
       <%= render "shared/sidebar" %>
     </aside>
+    <% end %>
     <footer>
       <%= render "shared/footer"%>
     </footer>

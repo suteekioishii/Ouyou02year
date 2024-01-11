@@ -33,3 +33,6 @@ end
 
 #パスワードの暗号化用
 gem'bcrypt','~>3.1.7'
+
+#メールアドレスのvalidate
+gem'email_validator','~>1.6'

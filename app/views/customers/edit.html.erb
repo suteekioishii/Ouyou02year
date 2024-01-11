@@ -1,3 +1,4 @@
+<div class="toolbar"><%= link_to "会員の詳細に戻る", [@customer] %></div>
 <%= form_for @customer do |form| %>
     <%=render"shared/errors",obj:@customer%>
     <%= render "shared/customer_form",form: form %>

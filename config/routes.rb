@@ -18,4 +18,16 @@ Rails.application.routes.draw do
     resources :reservations
   end
   resource :session
+
+  #管理者向け
+  namespace :admin do
+    root "top#index"
+    resources :salon
+  end
+
+  #オーナー
+  namespace :owner do
+    root"top#index"
+    resources :stylist
+  end
 end

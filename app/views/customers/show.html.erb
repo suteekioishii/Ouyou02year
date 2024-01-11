@@ -21,3 +21,4 @@
         <td><%= @customer.birthday&.strftime("%Y年%m月%d日") %></td>
     </tr>
 </table>
+<div class="toolbar"><%=link_to "編集",[:edit, @customer] %></div>
