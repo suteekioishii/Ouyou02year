@@ -1,0 +1,12 @@
+<h1>Owner::Stylists#index</h1>
+<h3><%= @salon.name %></h3>
+    <table class ="attr">
+        <tr>
+            <th>名前</th>
+        </tr>
+        <% @stylists&.each do |stylist|%>
+            <tr>
+                <td><%= link_to stylist.name, [:owner,stylist] %></td>
+            </tr>
+        <% end %>
+    </table>

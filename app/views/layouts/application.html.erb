@@ -22,7 +22,7 @@
       <% if flash.alert %>
         <p class="alert"><%= flash.alert %>
       <% end %>
-      <%=yield %>
+      <%= yield %>
     </main>
      <!--customerなら新規登録の誘導を行う。-->
     <% if not controller.kind_of?(Admin::Base) and  not controller.kind_of?(Owner::Base)%>
