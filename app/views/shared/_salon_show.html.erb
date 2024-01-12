@@ -11,4 +11,9 @@
         <th>住所</th>
         <td><%= salon.adress %></td>
     </tr>
+    <tr>
+        <th>総いいね数</th>
+        <% count = salon.votes.count %>
+       <td> <span class ="vote">総いいね数<%= count %></span></td>
+    </tr>
 </table>

@@ -1,5 +1,5 @@
 <h1>Admin::Salons#edit</h1>
-<div class="toolbar"><%= link_to "美容院の詳細に戻る", [@salon] %></div>
+<div class="toolbar"><%= link_to "美容院一覧に戻る", [:admin,:salons] %></div>
 <%= form_for [:admin,@salon] do |form| %>
     <%= render"shared/errors",obj:@salon%>
     <%= render "shared/salon_form",form: form %>

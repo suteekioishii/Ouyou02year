@@ -4,7 +4,7 @@ class Vote < ApplicationRecord
 
     validate do
         #いいねルールに合わない場合は保存できない。
-        unless customer && customer.votable_for?(entry)
+        unless customer && customer.votable_for?(salon)
             errors.ad(:base, :invalid)
         end
     end

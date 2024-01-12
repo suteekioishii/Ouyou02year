@@ -1,4 +1,5 @@
 <h1>Admin::Salons#show</h1>
+<div class="toolbar"><%= link_to "美容院一覧に戻る", [:admin,:salons] %></div>
 <%= render "shared/salon_show" ,salon: @salon %>
 <div class="toolbar"><%=link_to "編集",[:edit,:admin,@salon] %></div>
 <%= link_to "削除",[:admin,:salon],

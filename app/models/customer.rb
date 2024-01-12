@@ -3,6 +3,7 @@ class Customer < ApplicationRecord
     has_secure_password
     has_many :reservations, dependent: :nullify
     has_many :votes, dependent: :destroy
+    has_many :salons, through: :votes
 
     #バリデーション
     #名前

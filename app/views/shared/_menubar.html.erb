@@ -1,15 +1,21 @@
 <!--メニューバー-->
 <nav class="menubar">
     <ul>
-        <%=menu_link_to"TOP",:root%>
-        <!--未実装　ログインした場合のみ表示される-->
-        <% if not current_customer %>
-                <%= menu_link_to "ユーザー登録", login_customers_path %>
-        <% else %>
-            <%= menu_link_to "予約情報", :reservations %>
-            <%= menu_link_to "マイページ", current_customer %>
-            <%= menu_link_to "ログアウト",:session,
-            method: :delete, data:{ confirm: "ログアウトしますか？"}%>
+        <% if current_admin %>
+            <%=menu_link_to"管理者用TOP",[:admin,:root] %>
         <% end %>
+        <% if not current_admin and not current_owner %>
+            <%=menu_link_to"TOP",:root%>
+            <!--未実装　ログインした場合のみ表示される-->
+            <% if not current_customer %>
+                    <%= menu_link_to "ユーザー登録", login_customers_path %>
+            <% else %>
+                <%= menu_link_to "予約情報", :reservations %>
+                <%= menu_link_to "マイページ", current_customer %>
+                <%= menu_link_to "ログアウト",:session,
+                method: :delete, data:{ confirm: "ログアウトしますか？"}%>
+            <% end %>
+        <% end %>
+
     </ul>
 </nav>

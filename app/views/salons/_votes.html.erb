@@ -1,0 +1,9 @@
+<div class = "vote">
+    <% @salon.customers.order("votes.created_at").each do | voter| %>
+        ★<%= voter.name %>
+    <% end %>
+
+    <% if current_customer && current_customer.votable_for?(@salon) %>
+        <%= link_to "★いいね!", [:like,@salon], method: :patch, class: "button" %>
+    <% end %>
+</div>

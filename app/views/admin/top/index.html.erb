@@ -1,5 +1,5 @@
 <h3>管理者用ログインフォーム</h2>
-<% if not current_customer %>
+<% if not current_admin %>
 
     <p>ログイン<p>
     <%= form_tag [:admin,:session], id: "login_form" do %>
@@ -17,7 +17,7 @@
     <div>
         <%= link_to "会員登録はこちら", :new_customer %>
     </div>
-<% end %>
+    <% end %>
 
 <% else %>
     <p>ログイン済み</p>
