@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     resources :salons
   end
   resources :salons do
+    #いいね機能のアクション
+    patch "like", "unlike", on: :member
+    get "voted", on: :collection
     #ネスト
     resources :customers
     resources :reservations
@@ -22,12 +25,14 @@ Rails.application.routes.draw do
   #管理者向け
   namespace :admin do
     root "top#index"
-    resources :salon
+    resources :salons
+    resource :session
   end
 
   #オーナー
   namespace :owner do
     root"top#index"
-    resources :stylist
+    resources :stylists
+    resource :session
   end
 end

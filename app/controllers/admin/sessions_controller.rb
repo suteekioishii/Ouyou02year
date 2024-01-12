@@ -1,21 +1,21 @@
-class SessionsController < ApplicationController
+class Admin::SessionsController < Admin::Base
     def show
     end
 
     #ログイン
     def create
-        customer =  Customer.find_by(name: params[:name])
+        admin =  Administrator.find_by(name: params[:name])
 
-        if customer&.authenticate(params[:password])
-            cookies.signed[:customer_id] = {
-                value: customer.id,
+        if admin&.authenticate(params[:password])
+            cookies.signed[:admin_id] = {
+                value: admin.id,
                 expires: 6000.seconds.from_now
             }
             flash.notice = "ログインに成功しました。"
-            redirect_to :root
+            redirect_to [:admin,:salons]
         else
             flash.alert = "名前とパスワードが一致しません"
-            redirect_to :root
+            redirect_to :admin_root
         end
     end
 

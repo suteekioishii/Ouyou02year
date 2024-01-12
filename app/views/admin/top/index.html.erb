@@ -1,2 +1,25 @@
 <h3>管理者用ログインフォーム</h2>
-<%= render "shared/login_form" %>
+<% if not current_customer %>
+
+    <p>ログイン<p>
+    <%= form_tag [:admin,:session], id: "login_form" do %>
+    <div>
+        <label>ユーザー名：</label>
+        <input type = "text" name="name">
+    </div>
+    <div>
+        <label>パスワード：</label>
+        <input type="password" name="password">
+    </div>
+    <div>
+        <input type="submit" value="ログイン">
+    </div>
+    <div>
+        <%= link_to "会員登録はこちら", :new_customer %>
+    </div>
+<% end %>
+
+<% else %>
+    <p>ログイン済み</p>
+    <%= link_to "店舗検索",[:admin,:salons] %>
+<% end %>

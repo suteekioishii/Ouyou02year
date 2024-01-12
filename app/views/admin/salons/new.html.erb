@@ -1,0 +1,7 @@
+<h1>Admin::Salons#new</h1>
+<%= form_for [:admin,@salon] do |form| %>
+    <%=render"shared/errors",obj:@salon%>
+    <%= render "shared/salon_form",form: form %>
+    <div><%= form.submit %></div>
+<% end %>
+<div class="toolbar"><%=link_to "編集",[:edit,:admin,@salon] %></div>

@@ -1,0 +1,14 @@
+<table class="attr">
+    <tr>
+        <th><%= form.label :name, "店名" %></th>
+        <td><%= form.text_field :name %></td>
+    </tr>
+    <tr>
+        <th><%= form.label :prefecture, "都道府県" %></th>
+        <td><%= form.select :prefecture, options_for_select(Salon.prefecture,:selected=>@salon) %></td>
+    </tr>
+    <tr>
+        <th><%= form.label :adress, "住所" %>
+        <td><%= form.text_field :adress %>
+    </tr>
+</table>

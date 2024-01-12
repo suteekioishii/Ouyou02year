@@ -22,6 +22,17 @@ class CustomersController < ApplicationController
   def edit
     @customer = Customer.find(params[:id])
   end
+
+  def destroy
+    @customer = Customer.find(params[:id])
+    @name = @customer.name
+    @customer.destroy
+    redirect_to :root, notice: "ユーザー#{@name}を削除しました"
+  end
+
+  def edit
+    @customer = Customer.find(params[:id])
+  end
   
   def login
   end

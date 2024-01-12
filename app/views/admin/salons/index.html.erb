@@ -1,0 +1,10 @@
+<h1>Admin::Salons#index</h1>
+<%= link_to "サロンの新規登録",[:new,:admin,:salon] %>
+<%= render "shared/form_search" %>
+<tbody>
+    <% @salons&.each do |salon|%>
+        <tr>
+            <td><%= link_to salon.name, [:admin,salon] %></td>
+        </tr>
+    <% end %>
+</tbody>

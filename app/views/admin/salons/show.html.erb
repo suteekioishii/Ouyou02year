@@ -1,0 +1,5 @@
+<h1>Admin::Salons#show</h1>
+<%= render "shared/salon_show" ,salon: @salon %>
+<div class="toolbar"><%=link_to "編集",[:edit,:admin,@salon] %></div>
+<%= link_to "削除",[:admin,:salon],
+            method: :delete, data:{ confirm: "美容室を削除しますか？"}%>

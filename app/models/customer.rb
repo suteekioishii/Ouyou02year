@@ -2,7 +2,7 @@ class Customer < ApplicationRecord
     #関連付け
     has_secure_password
     has_many :reservations, dependent: :nullify
-    has_many :votes, dependent: :nullify
+    has_many :votes, dependent: :destroy
 
     #バリデーション
     #名前
@@ -18,4 +18,9 @@ class Customer < ApplicationRecord
     #パスワード
     attr_accessor :current_password
     validates :password, presence: { if: :current_password}
+
+    #いいねのルール・一つのお店につき一回のみ投票できる。
+    def votable_for?(salon)
+        salon  && !votes.exists?(salon_id: salon.id)
+    end
 end

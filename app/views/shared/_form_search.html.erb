@@ -1,8 +1,13 @@
-<%= form_tag :salons, method: :get, class: "index" do %>
+<% if controller.kind_of?(Admin::Base)%>
+    <% @path = [:admin,:salons] %>
+<% else %>
+    <% @path = :salons%>
+<% end %>
+<%= form_tag @path, method: :get, class: "index" do %>
     <%= text_field_tag "q",params[:q] %>
     <%= submit_tag "検索" %>
     <!--都道府県選択-->
-    <%= select_tag :prefecture, options_for_select(Salon.prefecture,:selected=>@salon )%>
+    <%= select_tag :prefecture, options_for_select(Salon.prefecture,:selected=>@salon)%>
     <!--コース選択-->
     <%=radio_button_tag "sex",1,params[:sex]=="1" %>
     <%=label_tag "sex" , "男"%>
