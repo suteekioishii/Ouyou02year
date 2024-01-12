@@ -1,4 +1,5 @@
 class Owner::StylistsController < Owner::Base
+  before_action :owner_login_required
   def index
     @salon = current_owner.salon
     @stylists = @salon.stylists
