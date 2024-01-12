@@ -1,6 +1,10 @@
 class Admin::SalonsController < Admin::Base
   def index
-    @salons = Salon.where(prefecture: params[:prefecture])
+    if params[:prefecture] == "指定なし"
+      @salons = Salon.all
+    else
+      @salons = Salon.where(prefecture: params[:prefecture])
+    end
   end
 
   def show

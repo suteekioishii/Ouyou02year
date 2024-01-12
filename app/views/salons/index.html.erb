@@ -1,10 +1,18 @@
 <h1>Salons#index</h1>
 <%= render "shared/form_search" %>
-<tbody>
-    <% @salons&.each do |salon|%>
+<% if @salons.count != 0%>
+    <table class ="attr">
         <tr>
-            <td><%= link_to salon.name, salon %></td>
+            <th>店名</th>
+            <th>スタイリスト在籍数</th>
         </tr>
-    <% end %>
-</tbody>
-
+        <% @salons&.each do |salon|%>
+            <tr>
+                <td><%= link_to salon.name, salon %></td>
+                <td><%= salon.stylists.count%>人</td>
+            </tr>
+        <% end %>
+    </table>
+<% else %>
+    <h4>検索結果は0です。</h4>
+<% end %>

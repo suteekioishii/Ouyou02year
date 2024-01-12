@@ -53,7 +53,8 @@ class ReservationsController < ApplicationController
         for count in 0..@count-1
           @shift_date = @base_date.since(30.minutes*count)
           @shift = Shift.find_by(date_time: @shift_date,stylist_id: @stylist)
-          redirect_to @salon if not @shift.update_attribute(:reservation_id,@reservation.id)
+          
+            redirect_to @salon if not @shift.update_attribute(:reservation_id,@reservation.id)
         end
           redirect_to @reservation,notice: "予約しました。"
       else
