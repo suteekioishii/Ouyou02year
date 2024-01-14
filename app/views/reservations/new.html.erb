@@ -10,35 +10,31 @@
 <table class="attr" >
     <!--ベースの日付を作成-->
     <% @base_date = DateTime.new(2024,1,10,0,0,0) %>
-    <!--列名を作成-->
+    <!--列名を作成・表の１行目-->
     <tr>
-        <td></td>
+        <td></td><!--ここで左上のセルを作る-->
         <%for column_name in 0..6%>
-            <th width="150"><%= @base_date.since(1.days*column_name).month.to_s+"月"+@base_date.since(1.days*column_name).day.to_s+"日"%></th>
+            <th width="150">
+                <%= @base_date.since(1.days*column_name).month.to_s+"月"+@base_date.since(1.days*column_name).day.to_s+"日"%>
+            </th>
         <% end %>
     </tr>
+
     <!--縦に進める。30分ごと進める-->
     <% for minute in 0..47 %>
-        <% @dateCol = @base_date %>
-        <% @dateCol = @dateCol.since(30.minutes*minute)%>
+        <!--下にズレる-->
+        <% @dateCol = @base_date.since(30.minutes*minute)%>
         <tr>
             <!--行名を作成-->
-            <td width="180" height="30"class="reserved_tr"><%= @dateCol.hour.to_s+"時"+@dateCol.minute.to_s+"分~"%></td>
+            <td width="180" height="30"class="reserved_tr">
+                <%= @dateCol.hour.to_s+"時"+@dateCol.minute.to_s+"分~"%>
+            </td>
             <!--横に進める。1日進める-->
             <% for day in 0..6%>
-                <% @dateRow = @dateCol %>
-                <% @dateRow = @dateRow.since(1.days*day)%>
-                <!--Shiftを検索・required_timeの回数分-->
-                <% @searched_date = @dateRow%>
-                <!--コース別の必要時間を測る-->
-                <% @possible_reservation = true%><!--予約できるか区別用の変数-->
-                <% for count in 0..@required_time.to_i-1%>
-                    <% if not Shift.where(date_time: @searched_date.since((30*count).minutes),stylist_id: @stylist_id).exists?(reservation_id: nil) %>
-                        <% @possible_reservation = false %>
-                    <% end %>
-                <% end %>
+                <!--右にずらす-->
+                <% @searched_date = @dateCol.since(1.days*day)%>
                 <!--予約できるか判断-->
-                <% if @possible_reservation %>
+                <% if possible_shift(@searched_date,@stylist_id,@required_time) %>
                     <td>
                         <%= form.radio_button "reserved_date",@searched_date %>
                     </td> 

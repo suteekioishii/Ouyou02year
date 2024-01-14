@@ -35,8 +35,22 @@ class ApplicationController < ActionController::Base
             redirect_to :root,notice: "他のユーザーの予約情報は閲覧できません。"
         end 
     end
+  
+    #shiftが空いているか確認する。
+    private def possible_shift(searched_date,stylist_id,required_time)
+        possible_reservation = true #予約できるか判別するための変数・戻り数
+        for count in 0..required_time.to_i-1
+          if not Shift.where(date_time: searched_date.since((30*count).minutes),stylist_id: stylist_id).exists?(reservation_id: nil)
+            possible_reservation = false
+          end
+        end
+        return possible_reservation
+    end
+    helper_method :possible_shift
+    
 
-    ###########これ以下、エラー処理の記述
+    ######################################################
+    #################################これ以下、エラー処理の記述
     class LoginRequired < StandardError; end
     class Forbidden < StandardError; end
 

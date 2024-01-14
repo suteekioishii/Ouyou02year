@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-  before_action :login_required, only: [:index,:show]
+  before_action :login_required, only: [:create,:index,:show]
   before_action :id_confirmed_reservation, only: [:show]
   def index
   end
@@ -41,30 +41,34 @@ class ReservationsController < ApplicationController
   
   def create
     #ログインしている場合
-    if current_customer
-      #reservationを登録する。
+    if not params[:reservation][:reserved_date].nil?    #予約する時間帯が選択されてない場合
+      ##################
+      #####必要データの取得
       @salon = Salon.find_by(id: params[:salon_id])
       @reservation = Reservation.new(reservation_params)
       @reservation.customer_id = current_customer.id
-      if @reservation.save!
+      @count = params[:reservation][:reserved_time].to_i
+      @stylist = params[:stylist_id].to_i
+      @base_date = DateTime.parse(params[:reservation][:reserved_date])
+
+      #同時予約防止のための一行
+      @possible_shift = true if possible_shift(@base_date,@stylist,@count)
+      if @reservation.save! and @possible_shift
         #shiftを占有する。
-        @count = params[:reservation][:reserved_time].to_i
-        @stylist = params[:stylist_id].to_i
-        @base_date = DateTime.parse(params[:reservation][:reserved_date])
         #shiftを実際に取り出す
         for count in 0..@count-1
           @shift_date = @base_date.since(30.minutes*count)
           @shift = Shift.find_by(date_time: @shift_date,stylist_id: @stylist)
-          
             redirect_to @salon if not @shift.update_attribute(:reservation_id,@reservation.id)
         end
           redirect_to @reservation,notice: "予約しました。"
       else
-          redirect_to @salon
+          redirect_to @salon, notice: "希望の時間帯が既に予約されています。" 
       end
     else #ログインしていない場合
       #session[:reservation] = reservation_params
-      redirect_to new_customer_path, notice: "ログインを行なって下さい"
+      @salon = Salon.find_by(id: params[:salon_id])
+        redirect_to @salon,notice: "希望の時間帯が未選択です。" 
     end
   end
 
