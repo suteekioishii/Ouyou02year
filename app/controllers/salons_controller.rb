@@ -5,6 +5,10 @@ class SalonsController < ApplicationController
     else
       @salons = Salon.where(prefecture: params[:prefecture])
     end
+    @q = params[:q]
+    if @q
+      @salons = @salons.where("name LIKE ?", "%#{@q}%")
+    end
   end
 
   def show
@@ -24,19 +28,5 @@ class SalonsController < ApplicationController
   def unlike
     current_customer.salons.destroy(Salon.find(params[:id]))
     redirect_to current_customer, notice: "削除しました。"
-  end
-
-
-  #投票した記事
-  def voted
-    if params[:member_id]
-      @member = Member.find(params[:member_id])
-    else
-      @member = current_member
-    end
-    
-    @entries = @member.voted_entries.published
-      .order("votes.created_at DESC")
-      .page(params[:page]).per(15)
   end
 end

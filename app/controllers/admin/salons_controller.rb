@@ -1,4 +1,6 @@
 class Admin::SalonsController < Admin::Base
+  before_action :admin_login_required
+
   def index
     if params[:prefecture] == "指定なし"
       @salons = Salon.all
