@@ -1,4 +1,6 @@
 class ReservationsController < ApplicationController
+  before_action :login_required, only: [:index,:show]
+  before_action :id_confirmed_reservation, only: [:show]
   def index
   end
 

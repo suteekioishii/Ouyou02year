@@ -30,7 +30,7 @@ class Admin::SalonsController < Admin::Base
     if @salon.save
       redirect_to [:admin,@salon], notice: "美容院情報を更新しました。"
     else
-      render "admin_edit"
+      render "edit"
     end
   end
 

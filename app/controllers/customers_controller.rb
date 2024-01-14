@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
-  def index
-  end
+  before_action :login_required,only: [:show,:edit,:update,:destroy]
+  before_action :id_confirmed_customer, only: [:show,:edit,:update,:destroy]
 
   def new
     @customer = Customer.new
@@ -9,9 +9,19 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
     if @customer.save
-      redirect_to @customer, notice: "新規登録が完了しました。"
+      redirect_to "/", notice: "新規登録が完了しました。"
     else
       render "new"
+    end
+  end
+
+  def update
+    @customer = Customer.find(params[:id])
+    @customer.assign_attributes(customer_params)
+    if @customer.save
+      redirect_to @customer, notice: "美容院情報を更新しました。"
+    else
+      render "edit"
     end
   end
 

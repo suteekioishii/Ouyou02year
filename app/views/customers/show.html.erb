@@ -1,4 +1,6 @@
 <h1>Customers#show</h1>
+<div class="toolbar"><%=link_to "パスワードの変更",[:edit, :password] %></div>
+<div class="toolbar"><%=link_to "会員情報の編集",[:edit, @customer] %></div>
 <table class ="attr">
     <tr>
         <th>ユーザー名</th>
@@ -21,4 +23,23 @@
         <td><%= @customer.birthday&.strftime("%Y年%m月%d日") %></td>
     </tr>
 </table>
-<div class="toolbar"><%=link_to "編集",[:edit, @customer] %></div>
+
+<% if @customer.salons.count == 0 %>
+    <h3>お気に入り登録された店舗はありません。</h3>
+<% else %>
+    <h1>お気に入り登録された店舗</h3>
+    <table class ="attr">
+        <tr>
+            <th>店名</th>
+            <th>スタイリスト在籍数</th>
+            <th>お気に入り登録削除</th>
+        </tr>
+        <% @customer.salons.each do |salon| %>
+            <tr>
+                <td><%= link_to salon.name, salon %></td>
+                <td><%= salon.stylists.count%>人</td>
+                <td><%= link_to "削除",[:unlike,salon],method: :patch%></td>
+            </tr>
+        <% end %>
+    </table>
+<% end %>

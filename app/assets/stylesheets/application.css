@@ -100,3 +100,16 @@ main h1 {
     margin-bottom: 0.5em;
 }
 
+ul.toolbar,
+div.toolbar {
+  padding: 5px 0;
+  font-size: 90%;
+  text-align: left;
+  margin: 0px 2px;
+}
+
+ul.toolbar li:not(:last-child):after {
+  color: #888;
+  content: " | ";
+  margin: 0 2px;
+}

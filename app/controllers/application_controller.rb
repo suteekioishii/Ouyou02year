@@ -19,7 +19,21 @@ class ApplicationController < ActionController::Base
 
     #before_actionをコールバックとして使うため
     private def login_required
-        raise LoginRequired unless current_member
+        raise LoginRequired unless current_customer
+    end
+
+    #customer・ログインした本人のページのみ表示・コールバック
+    private def id_confirmed_customer
+        if params[:id].to_i != current_customer.id
+            redirect_to :root,notice: "他のユーザーのマイページは閲覧できません。"
+        end 
+    end
+
+    #reservation・ログインした本人のページのみ表示・コールバック
+    private def id_confirmed_reservation
+        if Reservation.find(params[:id]).customer.id != current_customer.id
+            redirect_to :root,notice: "他のユーザーの予約情報は閲覧できません。"
+        end 
     end
 
     ###########これ以下、エラー処理の記述

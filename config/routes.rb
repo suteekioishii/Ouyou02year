@@ -7,11 +7,13 @@ Rails.application.routes.draw do
       get "login", on: :collection
     end
   end
+
   resources :shifts
   resources :customers do
     get "login", on: :collection
     resources :salons
   end
+
   resources :salons do
     #いいね機能のアクション
     patch "like", "unlike", on: :member
@@ -20,7 +22,12 @@ Rails.application.routes.draw do
     resources :customers
     resources :reservations
   end
+
+  #ログイン処理
   resource :session
+
+  #パスワード
+  resource :password, only: [:show,:edit,:update]
 
   #管理者向け
   namespace :admin do

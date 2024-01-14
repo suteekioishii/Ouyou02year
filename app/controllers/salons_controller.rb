@@ -22,8 +22,8 @@ class SalonsController < ApplicationController
 
   #いいね削除
   def unlike
-    current_customer.votes.destroy(Salon.find(params[:id]))
-    redirect_to :salons, notice: "削除しました。"
+    current_customer.salons.destroy(Salon.find(params[:id]))
+    redirect_to current_customer, notice: "削除しました。"
   end
 
 

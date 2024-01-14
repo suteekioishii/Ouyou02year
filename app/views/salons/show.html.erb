@@ -1,5 +1,8 @@
 <h1>Salons#show</h1>
 <%= render "shared/salon_show" ,salon: @salon %>
+<%= render "votes" %>
+
+<h1>予約の希望選択</h1>
 <%= form_with url: [:new,@salon,:reservation], method: :get do |f| %>
     <!--コース選択-->
     <%= f.collection_select :reserved_course, Course.all,:id,:name %>
@@ -17,4 +20,3 @@
     <br>
     <%= f.submit "予約可能時間の表示" %>
 <% end %>
-<%= render "votes" %>
