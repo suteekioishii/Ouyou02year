@@ -51,23 +51,26 @@ class ReservationsController < ApplicationController
       @stylist = params[:stylist_id].to_i
       @base_date = DateTime.parse(params[:reservation][:reserved_date])
 
-      #同時予約防止のための一行
-      @possible_shift = true if possible_shift(@base_date,@stylist,@count)
-      if @reservation.save! and @possible_shift
-        #shiftを占有する。
-        #shiftを実際に取り出す
-        for count in 0..@count-1
-          @shift_date = @base_date.since(30.minutes*count)
-          @shift = Shift.find_by(date_time: @shift_date,stylist_id: @stylist)
+      #同時予約防止のための条件分岐
+      if possible_shift(@base_date,@stylist,@count)   
+        if @reservation.save!
+          #shiftを占有する。
+          #shiftを実際に取り出す
+          for count in 0..@count-1
+            @shift_date = @base_date.since(30.minutes*count)
+            @shift = Shift.find_by(date_time: @shift_date,stylist_id: @stylist)
             redirect_to @salon if not @shift.update_attribute(:reservation_id,@reservation.id)
+          end
+            redirect_to @reservation,notice: "予約しました。"
+        else
+          redirect_to @salon, notice: "予約情報が保存できませんでした。" 
         end
-          redirect_to @reservation,notice: "予約しました。"
       else
+          @salon = Salon.find_by(id: params[:salon_id])
           redirect_to @salon, notice: "希望の時間帯が既に予約されています。" 
       end
     else #ログインしていない場合
       #session[:reservation] = reservation_params
-      @salon = Salon.find_by(id: params[:salon_id])
         redirect_to @salon,notice: "希望の時間帯が未選択です。" 
     end
   end

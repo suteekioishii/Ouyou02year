@@ -9,7 +9,7 @@ gnames = ["太郎", "次郎", "花子"]
         phone: "090-12#{idx}-98#{idx}",                     #電話番号
         sex: [1, 1, 2][idx % 3],                            #性別
         birthday: "1981-12-01",                              #生年月日
-        password: "salon!",
-        password_confirmation: "salon!"
+        password: "salon!!!",
+        password_confirmation: "salon!!!"
     )
 end
