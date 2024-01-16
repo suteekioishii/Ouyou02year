@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     #いいね機能のアクション
     patch "like", "unlike", on: :member
     get "voted", on: :collection
-    #ネスト
+    #ネスト^
     resources :customers
     resources :reservations
   end
@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     root "top#index"
     resources :salons
     resource :session
+    resource :password
+    resources :administrators
   end
 
   #オーナー
@@ -41,5 +43,7 @@ Rails.application.routes.draw do
     root"top#index"
     resources :stylists
     resource :session
+    resource :password
+    resources :owners
   end
 end

@@ -4,12 +4,14 @@
         <!--管理者用-->
         <% if current_admin %>
             <%=menu_link_to"管理者用TOP",[:admin,:root] %>
+                <%= menu_link_to "マイページ", [:admin,current_admin] %>
                 <%= menu_link_to "ログアウト",[:admin,:session],
                 method: :delete, data:{ confirm: "ログアウトしますか？"}%>
         <% end %>
         <!--オーナー用-->
         <% if current_owner %>
             <%=menu_link_to"オーナー用TOP",[:owner,:root] %>
+                <%= menu_link_to "マイページ", [:owner,current_owner]%>
                 <%= menu_link_to "ログアウト",[:owner,:session],
                 method: :delete, data:{ confirm: "ログアウトしますか？"}%>
         <% end %>

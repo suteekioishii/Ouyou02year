@@ -1,0 +1,6 @@
+<div class="toolbar"><%= link_to "会員の詳細に戻る", [:admin,@admin] %></div>
+<%= form_for [:admin,@admin] do |form| %>
+    <%=render"shared/errors",obj:@admin %>
+    <%= render "shared/admin_form",form: form %>
+    <div><%= form.submit %></div>
+<% end %>

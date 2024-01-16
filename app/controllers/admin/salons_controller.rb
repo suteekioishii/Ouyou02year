@@ -43,8 +43,13 @@ class Admin::SalonsController < Admin::Base
   def destroy
     @salon = Salon.find(params[:id])
     @name = @salon.name
-    @salon.destroy
-    redirect_to :salons, notice: "#{@name}を削除しました。"
+    if @salon.stylists.count == 0
+      @salon.destroy
+      redirect_to [:admin,:salons], notice: "#{@name}を削除しました。"
+    else
+      redirect_to [:admin,@salon], notice: "#{@name}にはスタイリストが在籍しています。"
+    end
+
   end
 
   # ストロング・パラメータ

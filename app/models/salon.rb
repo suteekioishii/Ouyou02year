@@ -3,6 +3,7 @@ class Salon < ApplicationRecord
     has_many :stylists, dependent: :destroy
     has_many :votes, dependent: :destroy
     has_many :customers, through: :votes
+    belongs_to :owner, optional: true
 
     #バリデーション
     validates :name, presence: true,

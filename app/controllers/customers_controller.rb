@@ -19,7 +19,7 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @customer.assign_attributes(customer_params)
     if @customer.save
-      redirect_to @customer, notice: "美容院情報を更新しました。"
+      redirect_to @customer, notice: "会員情報を更新しました。"
     else
       render "edit"
     end

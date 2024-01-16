@@ -1,0 +1,6 @@
+<div class="toolbar"><%= link_to "会員の詳細に戻る", [:owner,@owner] %></div>
+<%= form_for [:owner,@owner] do |form| %>
+    <%=render"shared/errors",obj:@owner %>
+    <%= render "shared/owner_form",form: form %>
+    <div><%= form.submit %></div>
+<% end %>
