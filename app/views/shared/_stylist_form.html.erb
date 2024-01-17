@@ -1,0 +1,10 @@
+<table class="attr">
+    <tr>
+        <th><%= form.label :name, "スタイリスト名" %></th>
+        <td><%= form.text_field :name %></td>
+    </tr>
+    <tr>
+        <th><%= form.label :name, "所属店舗" %></th>
+        <td><%= form.collection_select :salon_id, Salon.all,:id,:name%></td>
+    </tr>
+</table>

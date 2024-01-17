@@ -41,7 +41,11 @@ Rails.application.routes.draw do
   #オーナー
   namespace :owner do
     root"top#index"
-    resources :stylists
+    resources :stylists do
+      resources :shifts, only: [:new, :edit, :create, :update, :destroy] do
+        get "destroy_index", on: :collection
+      end
+    end
     resource :session
     resource :password
     resources :owners

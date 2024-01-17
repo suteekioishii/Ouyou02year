@@ -47,6 +47,18 @@ class ApplicationController < ActionController::Base
         return possible_reservation
     end
     helper_method :possible_shift
+  
+    #shiftが存在しているか確認する。シフトを返す
+    private def exists_shift(searched_date,stylist_id,required_time)
+        exists_shift = true #予約できるか判別するための変数・戻り数
+        for count in 0..required_time.to_i-1
+          if Shift.where(date_time: searched_date.since((30*count).minutes),stylist_id: stylist_id).count == 0
+            exists_shift = false
+          end
+        end
+        return exists_shift
+    end
+    helper_method :exists_shift
     
 
     ######################################################

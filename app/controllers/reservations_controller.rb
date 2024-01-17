@@ -40,8 +40,8 @@ class ReservationsController < ApplicationController
   end
   
   def create
-    #ログインしている場合
-    if not params[:reservation][:reserved_date].nil?    #予約する時間帯が選択されてない場合
+    #選択されていない場合
+    if not params[:reservation][:reserved_date].nil?
       ##################
       #####必要データの取得
       @salon = Salon.find_by(id: params[:salon_id])

@@ -1,0 +1,6 @@
+<h3>スタイリスト追加</h3>
+<%= form_for [:owner,@stylist] do |form| %>
+    <%=render"shared/errors",obj:@stylist %>
+    <%= render "shared/stylist_form",form: form %>
+    <div><%= form.submit %></div>
+<% end %>

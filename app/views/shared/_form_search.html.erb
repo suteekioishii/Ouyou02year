@@ -5,8 +5,16 @@
 <% end %>
 <%= form_tag @path, method: :get, class: "index" do %>
     <!--店舗名検索-->
-    <%= text_field_tag "q",params[:q] %>
-    <%= submit_tag "検索" %>
+    <h4>美容院の名前 : <%= text_field_tag "q",params[:q] %></h4>
+    <!--スタイリスト選択-->
+    <h4>
+        スタイリスト : <%= select_tag :stylist_name, options_from_collection_for_select(Stylist.all,:salon_id, :name) %>
+        <%= label_tag :stylist_free, '指定なし' %>
+        <%= check_box_tag :stylist_free,true,false,checked:true %>
+    </h4>
     <!--都道府県選択-->
-    <%= select_tag :prefecture, options_for_select(Salon.prefecture,:selected=>@salon)%>
+    <h4>
+        都道府県 : <%= select_tag :prefecture, options_for_select(Salon.prefecture,:selected=>@salon)%>
+    </h4>
+    <%= submit_tag "検索" %>
 <% end %>

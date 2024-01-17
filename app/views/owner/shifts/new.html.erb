@@ -1,0 +1,45 @@
+<h1>シフト追加</h1>
+<h3>スタイリスト : <%= @stylist.name %></h3>
+<%= form_with(url: [:owner,@stylist,:shifts], method: :post) do |form| %>
+    <%= hidden_field_tag :salon_id, @salon %>
+    <%= hidden_field_tag :stylist_id, @stylist_id %>
+<table class="attr" >
+    <!--ベースの日付を作成-->
+    <% @base_date = DateTime.new(2024,1,10,0,0,0) %>
+    <!--列名を作成・表の１行目-->
+    <tr>
+        <td></td><!--ここで左上のセルを作る-->
+        <%for column_name in 0..6%>
+            <th width="150">
+                <%= @base_date.since(1.days*column_name).month.to_s+"月"+@base_date.since(1.days*column_name).day.to_s+"日"%>
+            </th>
+        <% end %>
+    </tr>
+
+    <!--縦に進める。30分ごと進める-->
+    <% for minute in 0..47 %>
+        <!--下にズレる-->
+        <% @dateCol = @base_date.since(30.minutes*minute)%>
+        <tr>
+            <!--行名を作成-->
+            <td width="180" height="30"class="reserved_tr">
+                <%= @dateCol.hour.to_s+"時"+@dateCol.minute.to_s+"分~"%>
+            </td>
+            <!--横に進める。1日進める-->
+            <% for day in 0..6%>
+                <!--右にずらす-->
+                <% @searched_date = @dateCol.since(1.days*day)%>
+                <!--シフトがあるか判断-->
+                <% unless  exists_shift(@searched_date,@stylist_id,1) %>
+                    <td>
+                        <%= form.check_box :add_date, {multiple: true},@searched_date,nil %>
+                    </td> 
+                <% else %>
+                    <td><p>出勤</p></td>
+                <% end %>
+            <% end %>
+        </tr>
+    <% end %>
+</table>
+    <%= form.submit%>
+<% end %>
