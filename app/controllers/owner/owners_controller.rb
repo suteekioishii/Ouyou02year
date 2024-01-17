@@ -1,5 +1,7 @@
 class Owner::OwnersController < Owner::Base
   before_action :owner_login_required
+  before_action :id_confirmed_owner,only: [:show,:edit,:update]
+
   def show
     @owner = Owner.find(params[:id])
   end

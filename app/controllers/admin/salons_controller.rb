@@ -2,10 +2,21 @@ class Admin::SalonsController < Admin::Base
   before_action :admin_login_required
 
   def index
-    if params[:prefecture] == "指定なし"
+    #都道府県・検索
+    if params[:prefecture] == "全検索"
       @salons = Salon.all
     else
       @salons = Salon.where(prefecture: params[:prefecture])
+    end
+    #美容院・検索
+    @q = params[:q]
+    if @q
+      @salons = @salons.where("name LIKE ?", "%#{@q}%")
+    end
+    #スタイリスト検索
+    @stylist = params[:stylist_name]
+    unless @stylist_free
+      @salons = @salons.where(id: @stylist)
     end
   end
 

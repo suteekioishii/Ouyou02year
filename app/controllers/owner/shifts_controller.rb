@@ -1,4 +1,6 @@
-class Owner::ShiftsController < ApplicationController
+class Owner::ShiftsController < Owner::Base
+  before_action :owner_login_required
+
   def new
     @stylist_id = params[:stylist_id]
     @stylist = Stylist.find(@stylist_id)

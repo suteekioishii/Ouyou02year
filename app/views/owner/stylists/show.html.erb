@@ -1,7 +1,7 @@
 <h1>スタイリスト詳細</h1>
     <table class ="attr">
-    <%= link_to "シフト追加",[:new,:owner,@stylist,:shift] %><br>
-    <%= link_to "シフト削除",[:destroy_index,:owner,@stylist,:shifts] %>
+    <div class="toolbar"><%= link_to "シフト追加",[:new,:owner,@stylist,:shift] %><br></div>
+    <div class="toolbar"><%= link_to "シフト削除",[:destroy_index,:owner,@stylist,:shifts] %></div>
         <tr>
             <th>名前</th>
             <td><%= @stylist.name %></td>
@@ -11,3 +11,4 @@
             <td><%= @stylist.salon.name %></td>
         </tr>
     </table>
+    <div class="toolbar"><%= link_to "スタイリスト削除",[:owner,@stylist], method: :delete %></div>

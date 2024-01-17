@@ -42,11 +42,16 @@ class Owner::StylistsController < Owner::Base
   def destroy
     @stylist = Stylist.find(params[:id])
     @name = @stylist.name
-    if true
-      @stylist.destroy
-      redirect_to [:owner,:stylists], notice: "#{@name}を削除しました。"
+    #予約がない場合のみスタイリストを削除可能
+    if @stylist.shifts.where(date_time: Time.zone.now..).count == 0
+      if @stylist.shifts.count == 0
+        @stylist.destroy
+        redirect_to [:owner,:stylists], notice: "#{@name}を削除しました。"
+      else
+        redirect_to [:owner,@stylist], notice: "過去の予約情報が消えてしまうため削除できません。"
+      end
     else
-      redirect_to [:owner,@salon], notice: "#{@name}にはスタイリストが在籍しています。"
+      redirect_to [:owner,@stylist], notice: "#{@name}は予約を持っているため削除できません。"
     end
 
   end

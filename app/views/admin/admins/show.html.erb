@@ -1,0 +1,25 @@
+<h1>Admin::Admins#show</h1>
+<div class="toolbar"><%=link_to "パスワードの変更",[:edit, :admin, :password] %></div>
+<div class="toolbar"><%=link_to "会員情報の編集",[:edit, :admin, @admin] %></div>
+<table class ="attr">
+    <tr>
+        <th>ユーザー名</th>
+        <td><%= @admin.name%></td>
+    </tr>
+    <tr>
+        <th>メールアドレス</th>
+        <td><%= @admin.email %></td>
+    </tr>
+    <tr>
+        <th>電話番号</th>
+        <td><%= @admin.phone%></td>
+    </tr>
+    <tr>
+        <th>性別</th>
+        <td><%= @admin.sex == 1 ? "男" : "女" %></td>
+    </tr>
+    <tr>
+        <th>誕生日</th>
+        <td><%= @admin.birthday&.strftime("%Y年%m月%d日") %></td>
+    </tr>
+</table>
