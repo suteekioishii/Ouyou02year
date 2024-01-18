@@ -6,7 +6,11 @@
     <%= hidden_field_tag :stylist_id, @stylist_id %>
 <table class="attr" >
     <!--ベースの日付を作成-->
-    <% @base_date = DateTime.new(2024,1,10,0,0,0) %>
+    <!--ベースの日付を作成-->
+    <% @year = default_date.year %>
+    <% @month = default_date.month %>
+    <% @day = default_date.day %>
+    <% @base_date = DateTime.new(@year,@month,@day,0,0,0) %>
     <!--列名を作成・表の１行目-->
     <tr>
         <td></td><!--ここで左上のセルを作る-->

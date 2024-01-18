@@ -1,4 +1,13 @@
 class ApplicationController < ActionController::Base
+    #予約などを行う基準の値
+    #実際に運用する時は"DateTime.now"で現在時刻を入れる。
+    #動作確認のため現在の日時の三日前にする。
+    @@default_date = DateTime.now.ago(3.days)
+    private def default_date
+        @@default_date
+    end
+    helper_method :default_date
+
     #カスタマー用・ログイン判断
     private def current_customer
         Customer.find_by(id: cookies.signed[:customer_id]) if cookies.signed[:customer_id]
