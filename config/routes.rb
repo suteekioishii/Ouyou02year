@@ -1,30 +1,23 @@
 Rails.application.routes.draw do
   root "top#index"
 
-  resources :reservations do
-    resources :shifts
-    resources :customers do
-      get "login", on: :collection
-    end
-  end
+  resources :reservations 
 
   resources :shifts
   resources :customers do
     get "login", on: :collection
-    resources :salons
   end
 
-  resources :salons do
+  resources :salons, only:[:index, :show] do
     #いいね機能のアクション
     patch "like", "unlike", on: :member
     get "voted", on: :collection
-    #ネスト^
-    resources :customers
-    resources :reservations
+    #ネスト
+    resources :reservations, only: [:new,:create]
   end
 
   #ログイン処理
-  resource :session
+  resource :session, only: [:show,:create,:destroy]
 
   #パスワード
   resource :password, only: [:show,:edit,:update]
@@ -33,9 +26,9 @@ Rails.application.routes.draw do
   namespace :admin do
     root "top#index"
     resources :salons
-    resource :session
-    resource :password
-    resources :administrators
+    resource :session, only: [:show, :create, :update,:destroy]
+    resource :password, only: [:show,:edit,:update]
+    resources :administrators, only: [:show, :update, :edit]
   end
 
   #オーナー
@@ -46,8 +39,8 @@ Rails.application.routes.draw do
         get "destroy_index", on: :collection
       end
     end
-    resource :session
-    resource :password
-    resources :owners
+    resource :session, only: [:show, :create, :update,:destroy]
+    resource :password, only: [:show,:edit,:update]
+    resources :owners, only: [:show, :update, :edit]
   end
 end

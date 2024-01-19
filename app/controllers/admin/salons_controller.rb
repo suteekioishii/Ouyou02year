@@ -14,8 +14,8 @@ class Admin::SalonsController < Admin::Base
       @salons = @salons.where("name LIKE ?", "%#{@q}%")
     end
     #スタイリスト検索
-    @stylist = params[:stylist_name]
-    unless @stylist_free
+    @stylist = params[:salon_id]
+    unless params[:stylist_free]
       @salons = @salons.where(id: @stylist)
     end
   end

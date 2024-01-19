@@ -69,9 +69,11 @@ class ReservationsController < ApplicationController
           @salon = Salon.find_by(id: params[:salon_id])
           redirect_to @salon, notice: "希望の時間帯が既に予約されています。" 
       end
+      
     else #ログインしていない場合
       #session[:reservation] = reservation_params
-        redirect_to @salon,notice: "希望の時間帯が未選択です。" 
+      @salon = Salon.find_by(id: params[:salon_id])
+      redirect_to @salon,notice: "希望の時間帯が未選択です。" 
     end
   end
 

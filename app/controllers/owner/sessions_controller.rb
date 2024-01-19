@@ -5,7 +5,7 @@ class Owner::SessionsController < Owner::Base
     #ログイン
     def create
         owner =  Owner.find_by(name: params[:name])
-
+        if not (cookies.signed[:admin_id] or cookies.signed[:customer_id])
         if owner&.authenticate(params[:password])
             cookies.signed[:owner_id] = {
                 value: owner.id,
@@ -16,6 +16,10 @@ class Owner::SessionsController < Owner::Base
         else
             flash.alert = "名前とパスワードが一致しません"
             redirect_to :owner_root
+        end
+        else
+           flash.alert = "ログアウトしてください."
+           redirect_to :owner_root
         end
     end
 

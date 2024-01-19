@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     #ログイン
     def create
         customer =  Customer.find_by(name: params[:name])
-
+        if not (cookies.signed[:admin_id] or cookies.signed[:owner_id])
         if customer&.authenticate(params[:password])
             cookies.signed[:customer_id] = {
                 value: customer.id,
@@ -16,6 +16,10 @@ class SessionsController < ApplicationController
         else
             flash.alert = "名前とパスワードが一致しません"
             redirect_to :root
+        end
+        else
+           flash.alert = "ログアウトしてください."
+           redirect_to :root
         end
     end
 
