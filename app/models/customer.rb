@@ -12,7 +12,7 @@ class Customer < ApplicationRecord
     validates :email, email: {allow_blank: true}
     validates :phone, presence: true,
         format: { with:/\A\(?[0-9]*\)?-?[0-9]*-?[0-9]*\z/,allow_blank: true },
-        length: { minimum: 8, maximum: 20, allow_blank: true },
+        length: { minimum: 9, maximum: 19, allow_blank: true },
         uniqueness: { case_sensitive: false}
     validates :birthday, comparison:{ less_than: Time.current.to_date }
     
