@@ -36,8 +36,12 @@ class CustomersController < ApplicationController
   def destroy
     @customer = Customer.find(params[:id])
     @name = @customer.name
-    @customer.destroy
-    redirect_to :root, notice: "ユーザー#{@name}を削除しました"
+    if @customer.reservations.count == 0
+      @customer.destroy
+      redirect_to :root, notice: "ユーザー#{@name}を削除しました"
+    else
+      redirect_to @customer, notice: "予約情報を持っているため削除できません。"
+    end
   end
 
   def edit

@@ -24,6 +24,7 @@
         <td><%= @customer.birthday&.strftime("%Y年%m月%d日") %></td>
     </tr>
 </table>
+<div class="toolbar"><%=link_to "退会",[@customer], method: :delete %></div>
 
 <% if @customer.salons.count == 0 %>
     <h3>お気に入り登録された店舗はありません。</h3>
