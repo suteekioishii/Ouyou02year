@@ -1,8 +1,6 @@
 <% @page_title = "管理者ログインフォーム"%>
 <h1><%= @page_title %></h1>
 <% if not current_admin %>
-
-    <p>ログイン<p>
     <%= form_tag [:admin,:session], id: "login_form" do %>
     <div>
         <label>ユーザー名：</label>
@@ -18,6 +16,6 @@
     <% end %>
 
 <% else %>
-    <p>ログイン済み</p>
+    <h3>ログイン済み</h3>
     <%= link_to "店舗検索",[:admin,:salons] %>
 <% end %>

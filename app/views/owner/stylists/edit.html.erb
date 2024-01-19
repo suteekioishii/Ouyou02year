@@ -1,0 +1,7 @@
+<% @page_title = "スタイリスト編集"%>
+<h1><%= @page_title %></h1>
+<%= form_for [:owner,@stylist] do |form| %>
+    <%=render"shared/errors",obj:@stylist %>
+    <%= render "shared/stylist_form",form: form %>
+    <div><%= form.submit %></div>
+<% end %>

@@ -1,6 +1,5 @@
-<% @page_title = "スタイリスト一覧"%>
-<h1><%= @page_title %></h1>
-<h1><%= @salon.name %></h1>
+<% @page_title = "のスタイリスト一覧"%>
+<h1><%= @salon.name + @page_title %></h1>
     <%= link_to "スタイリストの新規登録",[:new,:owner,:stylist] %>
     <table class ="attr">
         <tr>

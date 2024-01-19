@@ -4,5 +4,5 @@ class Stylist < ApplicationRecord
 
     #バリデーション
     validates :name, presence: true,
-        length: { maximum: 11, allow_blank: true }
+        length: { maximum: 10, allow_blank: true }
 end
