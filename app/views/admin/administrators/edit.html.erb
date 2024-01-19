@@ -1,4 +1,5 @@
-<div class="toolbar"><%= link_to "会員の詳細に戻る", [:admin,@admin] %></div>
+<% @page_title = " 管理者編集"%>
+<h1><%= @page_title %></h1><div class="toolbar"><%= link_to "会員の詳細に戻る", [:admin,@admin] %></div>
 <%= form_for [:admin,@admin] do |form| %>
     <%=render"shared/errors",obj:@admin %>
     <%= render "shared/admin_form",form: form %>

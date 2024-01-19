@@ -1,4 +1,5 @@
-<h1>Reservations#new</h1>
+<% @page_title = "予約の新規登録"%>
+<h1><%= @page_title %></h1>
 <h3>選択された美容師 : <%= @stylist_name %></h3>
 <h3>選択されたコース : <%= @course_name %></h3>
 <%= form_with model:[@salon,@reservation] do |form| %>

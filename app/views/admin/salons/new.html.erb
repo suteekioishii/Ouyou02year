@@ -1,4 +1,5 @@
-<h1>Admin::Salons#new</h1>
+<% @page_title = "美容院新規登録"%>
+<h1><%= @page_title %></h1>
 <%= form_for [:admin,@salon] do |form| %>
     <%=render"shared/errors",obj:@salon%>
     <%= render "shared/salon_form",form: form %>

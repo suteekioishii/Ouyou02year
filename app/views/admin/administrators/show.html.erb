@@ -1,4 +1,5 @@
-<h1>Admin::Admins#show</h1>
+<% @page_title = " 管理者詳細"%>
+<h1><%= @page_title %></h1>
 <div class="toolbar"><%=link_to "パスワードの変更",[:edit, :admin, :password] %></div>
 <div class="toolbar"><%=link_to "会員情報の編集",[:edit, :admin, @admin] %></div>
 <table class ="attr">

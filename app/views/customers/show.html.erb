@@ -1,4 +1,5 @@
-<h1>Customers#show</h1>
+<% @page_title = " 会員詳細"%>
+<h1><%= @page_title %></h1>
 <div class="toolbar"><%=link_to "パスワードの変更",[:edit, :password] %></div>
 <div class="toolbar"><%=link_to "会員情報の編集",[:edit, @customer] %></div>
 <table class ="attr">

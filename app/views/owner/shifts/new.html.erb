@@ -1,4 +1,5 @@
-<h1>シフト追加</h1>
+<% @page_title = "シフト登録"%>
+<h1><%= @page_title %></h1>
 <h3>スタイリスト : <%= @stylist.name %></h3>
 <div class="toolbar"><%= link_to "スタイリスト詳細に戻る",[:owner,@stylist] %></div>
 <%= form_with(url: [:owner,@stylist,:shifts], method: :post) do |form| %>

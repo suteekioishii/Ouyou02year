@@ -1,4 +1,5 @@
-<h1>スタイリスト詳細</h1>
+<% @page_title = "スタイリスト詳細"%>
+<h1><%= @page_title %></h1>
     <table class ="attr">
     <div class="toolbar"><%= link_to "シフト追加",[:new,:owner,@stylist,:shift] %><br></div>
     <div class="toolbar"><%= link_to "シフト削除",[:destroy_index,:owner,@stylist,:shifts] %></div>

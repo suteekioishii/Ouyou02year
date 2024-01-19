@@ -1,5 +1,5 @@
-<h1>Owner::Passwords#edit</h1>
-
+<% @page_title = "パスワード変更"%>
+<h1><%= @page_title %></h1>
 <div class="toolbar"><%= link_to "マイページに戻る", [:owner,current_owner] %></div>
 
 <%= form_for @owner, url: [:owner,:password] do |form| %>
