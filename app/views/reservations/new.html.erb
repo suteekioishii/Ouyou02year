@@ -2,6 +2,12 @@
 <h1><%= @page_title %></h1>
 <h3>選択された美容師 : <%= @stylist_name %></h3>
 <h3>選択されたコース : <%= @course_name %></h3>
+<!--ベースの日付を作成-->
+<% @year = @default_date.year %>
+<% @month = @default_date.month %>
+<% @day = @default_date.day %>
+<% @base_date  = DateTime.new(@year,@month,@day,0,0,0) %>
+<!--ここからシフト予約表の作成-->
 <%= form_with model:[@salon,@reservation] do |form| %>
     <%= hidden_field_tag :salon_id, @salon %>
     <%= hidden_field_tag :stylist_id, @stylist_id %>
@@ -9,11 +15,6 @@
     <%= form.hidden_field :course_id, :value =>  @course_id%>
     <%= form.hidden_field :sum_price, :value =>  @sum_price%>
 <table class="attr" >
-    <!--ベースの日付を作成-->
-    <% @year = default_date.year %>
-    <% @month = default_date.month %>
-    <% @day = default_date.day %>
-    <% @base_date = DateTime.new(@year,@month,@day,0,0,0) %>
     <!--列名を作成・表の１行目-->
     <tr>
         <td></td><!--ここで左上のセルを作る-->

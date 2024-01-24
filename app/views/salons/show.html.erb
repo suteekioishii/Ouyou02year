@@ -5,6 +5,11 @@
 
 <h1>予約の希望選択</h1>
 <%= form_with url: [:new,@salon,:reservation], method: :get do |f| %>
+    <%= f.label :base_date, "予約希望日時",
+        for:"base_date" %>
+    <%= f.date_select :base_date,
+        start_year:  DateTime.now.year, end_year:  DateTime.now.year.to_i + 1,
+        use_month_numbers: true %><br>
     <!--コース選択-->
     <%= f.collection_select :reserved_course, Course.all,:id,:name %>
     <!--

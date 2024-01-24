@@ -5,6 +5,21 @@ class Owner::ShiftsController < Owner::Base
     @stylist_id = params[:stylist_id]
     @stylist = Stylist.find(@stylist_id)
     @salon = @stylist.salon.id
+
+    #基準時刻の設定
+    if not params["base_date(1i)"].nil?
+      @now = DateTime.now()
+      @year  = params["base_date(1i)"].to_i
+      @month = params["base_date(2i)"].to_i
+      @day   = params["base_date(3i)"].to_i
+      @default_date = DateTime.new(@year,@month,@day,0,0,0).ago(3.days)
+      @default_date = DateTime.now if @now.year > @year
+      @default_date = DateTime.now if @now.month > @month
+      @default_date = DateTime.now if @now.day > @day and @now.month >= @month
+    else
+      @default_date = DateTime.now
+    end
+    @default_date = @default_date.since(1.days)
   end
 
   def destroy_index
@@ -15,18 +30,38 @@ class Owner::ShiftsController < Owner::Base
     #destroyアクションに遷移するためだけにレコードを取り出す。
     #該当レコードを持たずにdestroyアクションに行く方法が分からない。
     @shift = Shift.first
+
+    #基準時刻の設定
+    if not params["base_date(1i)"].nil?
+      @now = DateTime.now()
+      @year  = params["base_date(1i)"].to_i
+      @month = params["base_date(2i)"].to_i
+      @day   = params["base_date(3i)"].to_i
+      @default_date = DateTime.new(@year,@month,@day,0,0,0).ago(3.days)
+      @default_date = DateTime.now if @now.year > @year
+      @default_date = DateTime.now if @now.month > @month
+      @default_date = DateTime.now if @now.day > @day and @now.month >= @month
+    else
+      @default_date = DateTime.now
+    end
+    @default_date = @default_date.since(1.days)
   end
 
   def create
     #必要データの取得(エラーが絶対起きない、hidden_fieldのデータ)
     @salon = Salon.find(params[:salon_id])
     @stylist = Stylist.find(params[:stylist_id])
+    @now = DateTime.now()
+    @year = params[:"base_date(1i)"].to_i
+    @month = params[:"base_date(2i)"].to_i
+    @day = params[:"base_date(3i)"].to_i
+    @default_date = DateTime.now.since(1.days)
 
     if not params[:add_date].nil?
       @add_dates = params[:add_date]
       #シフトの追加
       @add_dates.each do |add_date|
-        add_date = DateTime.parse(add_date)
+      add_date = DateTime.parse(add_date)
         #シフトの重複追加防止
         unless exists_shift(add_date,@stylist,1)
           @shift = shift_create(@stylist,add_date)

@@ -2,16 +2,25 @@
 <h1><%= @page_title %></h1>
 <h3>スタイリスト : <%= @stylist.name %></h3>
 <div class="toolbar"><%= link_to "スタイリスト詳細に戻る",[:owner,@stylist] %></div>
+<!--ベースの日付を作成-->
+<% @year = @default_date.year %>
+<% @month = @default_date.month %>
+<% @day = @default_date.day %>
+<% @base_date  = DateTime.new(@year,@month,@day,0,0,0) %>
+<h1>予約の時間選択</h1>
+<%= form_with url: [:destroy_index,:owner,@stylist,:shifts], method: :get do |f| %>
+        <%= f.label :base_date, "予約希望日時",
+            for:"base_date" %>
+        <%= f.date_select :base_date,
+            start_year:  DateTime.now.year, end_year:  DateTime.now.year.to_i + 1,
+            use_month_numbers: true %>
+    <%= f.submit "予約可能時間の表示" %>
+<% end %>
+<!--ここからシフトの予約表を作成-->
 <%= form_with(url: [:owner,@stylist,@shift], method: :delete) do |form| %>
     <%= hidden_field_tag :salon_id, @salon %>
     <%= hidden_field_tag :stylist_id, @stylist_id %>
 <table class="attr" >
-    <!--ベースの日付を作成-->
-    <!--ベースの日付を作成-->
-    <% @year = default_date.year %>
-    <% @month = default_date.month %>
-    <% @day = default_date.day %>
-    <% @base_date = DateTime.new(@year,@month,@day,0,0,0) %>
     <!--列名を作成・表の１行目-->
     <tr>
         <td></td><!--ここで左上のセルを作る-->
@@ -51,5 +60,5 @@
         </tr>
     <% end %>
 </table>
-    <%= form.submit%>
+    <%= form.submit "シフト削除実行"%>
 <% end %>
