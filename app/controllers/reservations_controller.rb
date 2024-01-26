@@ -16,7 +16,7 @@ class ReservationsController < ApplicationController
       @year  = params["base_date(1i)"].to_i
       @month = params["base_date(2i)"].to_i
       @day   = params["base_date(3i)"].to_i
-      @default_date = DateTime.new(@year,@month,@day,0,0,0).ago(3.days)
+      @default_date = DateTime.new(@year,@month,@day,0,0,0).ago(1.days)
       @default_date = DateTime.now if @now.year > @year
       @default_date = DateTime.now if @now.month > @month
       @default_date = DateTime.now if @now.day > @day and @now.month >= @month
